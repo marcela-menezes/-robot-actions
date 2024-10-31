@@ -24,7 +24,7 @@ Senha deve ser obrigatória
     Toast have text    Informe a sua senha secreta!
 
 Login com sucesso
-    [Tags]    smoke
+    [Tags]    nunes
 
     Submit credentials      qa    xperience
     Modal have text         Tudo certo!
