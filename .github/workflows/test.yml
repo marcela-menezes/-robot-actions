@@ -47,4 +47,10 @@ jobs:
         gh_access_token: ${{ secrets.GITHUB_TOKEN }}  #Variavel padrao do github, sempre usar assim.
       # Tem que dar deixar configurado a permisão no github "Settings > Actions> General > em "Workflow permissions" clicar em "Read and write permissions")".         
         report_path: logs
-        
+
+  # Para guardar os reports e poder baixalos depois     
+    - name: Upload Report
+      uses: actions/upload-artifact@v4.4.3
+      with: 
+        name: Resultado dos testes
+        path: logs
