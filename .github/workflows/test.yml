@@ -39,7 +39,7 @@ jobs:
 
 # Rodandos os testes dos projeto.
     - name: Rodandos os testes E2E
-      run: robot -d ./logs -i smoke tests
+      run: robot -d ./logs tests
 
     - name: Gerando o Report no Robot   
       uses: joonvena/robotframework-reporter-action@v2.4
