@@ -41,8 +41,10 @@ jobs:
     - name: Rodandos os testes E2E
       run: robot -d ./logs -i smoke tests
 
-    - name: Gerando o Report no Robot
+    - name: Gerando o Report no Robot   
       uses: joonvena/robotframework-reporter-action@v2.4
       with:
-        gh_access_token: ${{ secrets.GITHUB_TOKEN }}  #Variavel padrao do github, sempre usar assim
+        gh_access_token: ${{ secrets.GITHUB_TOKEN }}  #Variavel padrao do github, sempre usar assim.
+      # Tem que dar deixar configurado a permisão no github "Settings > Actions> General > em "Workflow permissions" clicar em "Read and write permissions")".         
         report_path: logs
+        
