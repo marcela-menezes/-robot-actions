@@ -9,7 +9,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  tests:
+  chrome:
 
     runs-on: ubuntu-latest
 
@@ -54,5 +54,53 @@ jobs:
       uses: actions/upload-artifact@v4.4.3
       if: always()
       with: 
-        name: Resultado dos testes
+        name: FirChrome resultado dos testes
         path: logs
+#---------------------------------------------------------------------------------------------------------------------
+  firefox:
+
+      runs-on: ubuntu-latest
+
+      steps:
+      - name: Get code
+        uses: actions/checkout@v4
+
+  # Instalando a bliblioteca Node.JS, pq o playwright (Browswer) precisa dela.
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+  # Instalando a bliblioteca Python, pq o robot framework precisa dela.
+      - name: Setup Python
+        uses: actions/setup-python@v5.3.0
+        with: 
+            python-version: 3.12
+
+      - name: Instalando as Deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Inicializando a biblioteca Browser
+        run: rfbrowser init
+
+  # Rodandos os testes dos projeto.
+      - name: Rodandos os testes E2E
+        run: robot -d ./logs tests
+
+      - name: Gerando o Report no Robot   
+        uses: joonvena/robotframework-reporter-action@v2.4 
+        if: always()
+        with:
+          gh_access_token: ${{ secrets.GITHUB_TOKEN }}  #Variavel padrao do github, sempre usar assim.
+        # Tem que dar deixar configurado a permisão no github "Settings > Actions> General > em "Workflow permissions" clicar em "Read and write permissions")".         
+          report_path: logs
+
+    # Para guardar os reports e poder baixalos depois     
+      - name: Upload Report
+        uses: actions/upload-artifact@v4.4.3
+        if: always()
+        with: 
+          name: Firefox resultado dos testes
+          path: logs
