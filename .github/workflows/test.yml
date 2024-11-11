@@ -37,7 +37,7 @@ jobs:
     - name: Inicializando a biblioteca Browser
       run: rfbrowser init
 
-# Rodandos os testes dos projeto
+# Rodandos os testes dos projeto.
     - name: Rodandos os testes E2E
       run: robot -d ./logs -i smoke tests
 
