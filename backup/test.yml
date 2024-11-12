@@ -2,11 +2,13 @@
 
 name: E2E Tests
 
-on:
+on:                         #Trigger de enventos de diparos
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+
+  workflow_dispatch:          #Trigger para dispara manualmente  
 
 jobs:
   tests:
